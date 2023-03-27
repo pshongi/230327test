@@ -1,0 +1,77 @@
+CREATE TABLE test2(
+email varchar2(50),
+name varchar2(15),
+board_number number,
+PRIMARY KEY (board_number)
+
+);
+commit;
+select * FROM test;
+
+DESC TEST
+INSERT INTO test VALUES('admin','1234','관리자');
+INSERT INTO test(name,id,pw) VALUES('adddddmin','12345','관리자');
+SELECT id, name, pw from test;
+
+UPDATE test SET name='user1', pw='user1' WHERE id='admin';
+ROLLBACK;
+
+
+select*FROM test;
+commit;
+DELETE FROM test WHERE id='user1';
+
+select count(*) FROM test;
+INSERT INTO test VALUES('admin','1234','관리자');
+INSERT INTO test(name,id,pw) VALUES('adddddmin','12345','관리자');
+select count(*) FROM test;
+select count(*) as total_member FROM test;
+
+
+select count(*) as 총회원수 FROM test;
+SELECT Max(cost) FROM test;
+select min(cost) FROM test;
+SELECT average(cost) FROM test;
+select nvl(count(*), 0)from test; //직계함수
+
+INSERT INTO test(id,pw,name) VALUES('addin','1223123','관리자');
+INSERT INTO test(id,pw,name) VALUES('user1','1235223','관리자');
+INSERT INTO test(id,pw,name) VALUES('user2','56423','관리자');
+INSERT INTO test(id,pw,name) VALUES('user3','112343123','관리자');
+select ROWNUM as rn, id , pw, name from test where  id like '%test%' order by rn desc; // test 라는 텍스트가 포함된 모든 것.
+
+selct ROWNUM as rn, id, pw, name
+FROM test
+where rn>=4 and rn<=6
+ORDER by rn desc;
+
+SELECT AA.* FROM (SELECT ROWNUM as rn, id, pw, name FROM test)AA 
+WHERE AA.rn >= 4 AND AA.rn <=6;
+ //AA.* aa안에 있는 모든 컬럼을 볼 것이다.
+ //바로 whre rn>=4 등이 안되는 이유
+ 
+ ALTER table test ADD email varchar2(20);
+ ALTER table test ADD num number;
+ desc test;
+ 
+ SELECT * FROM test;
+ UPDATE test set num=0, email = ' ' ;
+AlTER Table test modify email varchar2(200);
+
+ALTER table test rename column num to member_num;
+
+desc test;
+
+CREATE SEQUENCE test_seq INCREMENT BY 1 START WITH 1;
+
+SELECT * FROM Test ;
+INSERT INTO test VALUES('test3',  '333', '테스트3', test_seq.nextval, 010101);
+
+INSERT INTO test VALUES('test4',  '444', '테스트4', test_seq.nextval, 010101010);
+INSERT INTO test VALUES('test5',  '555', '테스트5', test_seq.nextval, 14525);
+drop talbe test;
+
+
+
+
+
